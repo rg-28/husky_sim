@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="model" default="$(find husky_sim)/urdf/husky.urdf.xacro"/>
+  <arg name="gui" default="true" />
+  <param name="robot_description" textfile="$(arg model)"/>
+  <param name="use_gui" value="$(arg gui)"/>
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="odometry_node" pkg="husky_sim" type="odometry_node" />
+<!--  <node name="turtlebot_move_wheel" pkg="turtlebot" type="turtlebot_move_wheel" />-->
+  <node pkg="rviz" type="rviz" name="rviz" output="screen"/>
+</launch>

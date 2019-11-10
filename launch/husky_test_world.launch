@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="model" default="$(find husky_sim)/urdf/husky.urdf.xacro" />
+  <arg name="rvizconfig" default="$(find husky_sim)/rviz/turtlebot.rviz"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+	<arg name="world_name" value="$(find husky_sim)/world/test_world.world"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+  args="-urdf -model -unpause husky -param robot_description -x $(arg x) -y $(arg y) -z $(arg z)" />
+
+<!--  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"> 
+  <param name="publish_frequency" type="float" value="30.0" />
+  </node> -->
+
+</launch>
+

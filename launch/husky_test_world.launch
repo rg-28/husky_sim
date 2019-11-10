@@ -2,7 +2,7 @@
 
 <launch>
   <arg name="model" default="$(find husky_sim)/urdf/husky.urdf.xacro" />
-  <arg name="rvizconfig" default="$(find husky_sim)/rviz/turtlebot.rviz"/>
+  <arg name="rvizconfig" default="$(find husky_sim)/rviz/husky.rviz"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
 	<arg name="world_name" value="$(find husky_sim)/world/test_world.world"/>

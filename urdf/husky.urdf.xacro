@@ -37,15 +37,15 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <xacro:property name="husky_rear_bumper_extend" value="$(optenv HUSKY_REAR_BUMPER_EXTEND 0)" />
 
   <xacro:arg name="robot_namespace" default="/" />
-  <xacro:arg name="urdf_extras" default="empty.urdf" />
+  <!-- <xacro:arg name="urdf_extras" default="empty.urdf" /> -->
 
   <!-- Included URDF/XACRO Files -->
-  <xacro:include filename="$(find husky_description)/urdf/decorations.urdf.xacro" />
-  <xacro:include filename="$(find husky_description)/urdf/wheel.urdf.xacro" />
+  <xacro:include filename="$(find husky_sim)/urdf/decorations.urdf.xacro" />
+  <xacro:include filename="$(find husky_sim)/urdf/wheel.urdf.xacro" />
 
-  <xacro:include filename="$(find husky_description)/urdf/accessories/kinect_camera.urdf.xacro"/>
-  <xacro:include filename="$(find husky_description)/urdf/accessories/sick_lms1xx_mount.urdf.xacro"/>
-  <xacro:include filename="$(find husky_description)/urdf/accessories/sensor_arch.urdf.xacro"/>
+  <xacro:include filename="$(find husky_sim)/urdf/accessories/kinect_camera.urdf.xacro"/>
+  <xacro:include filename="$(find husky_sim)/urdf/accessories/sick_lms1xx_mount.urdf.xacro"/>
+  <xacro:include filename="$(find husky_sim)/urdf/accessories/sensor_arch.urdf.xacro"/>
 
   <xacro:property name="M_PI" value="3.14159"/>
 
@@ -68,7 +68,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://husky_description/meshes/base_link.dae" />
+        <mesh filename="package://husky_sim/meshes/base_link.dae" />
       </geometry>
     </visual>
     <collision>
@@ -201,7 +201,24 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     </plugin>
   </gazebo>
 
+  <gazebo>
+    <plugin name="husky_controller" filename="libgazebo_ros_skid_steer_drive.so">
+	<updateRate>100.0</updateRate>
+	<robotNamespace>/</robotNamespace>
+	<leftFrontJoint>front_left_wheel</leftFrontJoint>
+	<rightFrontJoint>front_right_wheel</rightFrontJoint>
+	<leftRearJoint>rear_left_wheel</leftRearJoint>
+	<rightRearJoint>rear_right_wheel</rightRearJoint>
+	<wheelSeparation>0.556</wheelSeparation>
+	<wheelDiameter>0.330</wheelDiameter>
+	<robotBaseFrame>base_link</robotBaseFrame>
+	<torque>1</torque>
+	<topicName>cmd_vel</topicName>
+	<broadcastTF>0</broadcastTF>
+    </plugin>
+  </gazebo>
+
   <!-- Optional custom includes. -->
-  <xacro:include filename="$(arg urdf_extras)" />
+ <!-- <xacro:include filename="$(arg urdf_extras)" />  -->
 
 </robot>

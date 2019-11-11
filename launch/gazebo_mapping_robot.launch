@@ -18,7 +18,7 @@
 	args="-urdf -param robot_description -z 0.1 -model husky" respawn="false" output="screen" />
 
 	<node name="rviz" pkg="rviz" type="rviz" 
-	args=" -d $(find husky_sim)/rviz/turtlebot.rviz"/>
+	args=" -d $(find husky_sim)/rviz/husky.rviz"/>
 
 	<node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
 		<remap from="scan" to="/scan" />

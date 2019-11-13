@@ -51,7 +51,7 @@ void cmd_velCallback(const geometry_msgs::Twist &twist_aux)
 
 int main(int argc, char** argv)
 {
-	ros::init(argc, argv, "base_controller");
+	ros::init(argc, argv, "base_controller_husky");
 	ros::NodeHandle n;
 	ros::Subscriber cmd_vel_sub=n.subscribe("cmd_vel",10,cmd_velCallback);
 	ros::Rate loop_rate(10);

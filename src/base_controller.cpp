@@ -20,11 +20,11 @@ double y = 0.0;
 double th = 0.0;
 geometry_msgs::Quaternion odom_quat;
 
-void cmd_velCallback(const geometry_msgs::Twist &twist_aux)
+void cmd_velCallback(const geometry_msgs::Twist &twist_mux)
 {
-	geometry_msgs::Twist twist=twist_aux;
-	double vel_x=twist_aux.linear.x;
-	double vel_th=twist_aux.angular.z;
+	geometry_msgs::Twist twist=twist_mux;
+	double vel_x=twist_mux.linear.x;
+	double vel_th=twist_mux.angular.z;
 	double right_vel=0.0;
 	double left_vel=0.0;
 	

@@ -202,7 +202,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   </gazebo>
 
   <gazebo>
-    <plugin name="husky_controller" filename="libgazebo_ros_diff_drive.so">
+    <plugin name="base_controller_husky" filename="libgazebo_ros_diff_drive.so">
 	<updateRate>30</updateRate>
 	<robotNamespace>/</robotNamespace>
 	<leftJoint>front_left_wheel</leftJoint>

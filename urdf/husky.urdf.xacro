@@ -202,7 +202,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   </gazebo>
 
   <gazebo>
-    <plugin name="base_controller_husky" filename="libgazebo_ros_diff_drive.so">
+    <plugin name="diff_drive_controller" filename="libgazebo_ros_diff_drive.so">
 	<updateRate>30</updateRate>
 	<robotNamespace>/</robotNamespace>
 	<leftJoint>front_left_wheel</leftJoint>
@@ -214,7 +214,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 	<wheelAcceleration>1</wheelAcceleration>
 	<robotBaseFrame>base_link</robotBaseFrame>
 	<wheelTorque>10</wheelTorque>
-	<commandTopic>cmd_vel</commandTopic>
+	<commandTopic>joy_teleop/cmd_vel</commandTopic>
 	<odometryTopic>odom</odometryTopic>
 	<odometryFrame>odom</odometryFrame>
 	<odometrySource>world</odometrySource>

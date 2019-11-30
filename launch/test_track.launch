@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="true"/>
+  <arg name="recording" default="false"/>
+  <arg name="model" default="$(find husky_sim)/urdf/husky.urdf.xacro"/>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find husky_sim)/world/test_track.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="recording" value="$(arg recording)"/>
+  </include>
+
+  <arg name="x" default="35.7482018" />
+  <arg name="y" default="-29.317823" />
+  <arg name="z" default="0.000824" />  
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+        args=" -unpause -urdf -model husky -param robot_description -x $(arg x) -y $(arg y) -z $(arg z)" respawn="false" output="screen" />
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+  </node>
+
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
+  </node>
+</launch>
